@@ -18,12 +18,14 @@ import com.ead.authuser.enums.UserType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "TB_USERS")
-public class UserModel implements Serializable {
+public class UserModel extends RepresentationModel<UserModel> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
