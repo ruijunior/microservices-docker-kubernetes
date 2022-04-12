@@ -1,0 +1,13 @@
+server:
+    port: 8089
+
+spring:
+    datasource:
+        url: jdbc:postgresql://${DB_HOST:localhost}:5434/ead-notification
+        username: postgres
+        password: notification_123
+    jpa:
+        hibernate:
+            ddl-auto: update
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
+        show-sql: true

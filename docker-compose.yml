@@ -1,0 +1,87 @@
+version: '3.9'
+
+networks:
+  ead-network:
+    driver: bridge
+  
+services:
+  authuser-postgresql:
+    image: postgres:13.6-alpine
+    container_name: authuser-postgresql
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 'authuser_123'
+      POSTGRES_USER: 'postgres'
+      POSTGRES_DB: 'ead-authuser'
+    ports:
+      - '5432:5432'
+    volumes: 
+      - ./authuser/db:/var/lib/postgresql/data
+    networks:
+      - ead-network
+  
+  course-postgresql:
+    image: postgres:13.6-alpine
+    restart: always
+    container_name: course-postgresql
+    environment:
+      POSTGRES_PASSWORD: 'course_123'
+      POSTGRES_USER: 'postgres'
+      POSTGRES_DB: 'ead-course'
+    ports:
+      - '5433:5432'
+    volumes: 
+      - ./course/db:/var/lib/postgresql/data
+    networks:
+      - ead-network
+
+  notification-postgresql:
+    image: postgres:13.6-alpine
+    restart: always
+    container_name: notification-postgresql
+    environment:
+      POSTGRES_PASSWORD: 'notification_123'
+      POSTGRES_USER: 'postgres'
+      POSTGRES_DB: 'ead-notification'
+    ports:
+      - '5434:5432'
+    volumes: 
+      - ./notification/db:/var/lib/postgresql/data
+    networks:
+      - ead-network
+  
+  # authuser-api:
+  #   image: authuser-api
+  #   command: ["wait-for-it.sh", "authuser-postgresql:5432", "-t", "30", "--", "java", "-jar", "authuser-api.jar"]
+  #   environment:
+  #     DB_HOST: authuser-postgresql
+  #   ports:
+  #     - '8087:8087'
+  #   networks:
+  #     - ead-network
+  #   depends_on:
+  #     - authuser-postgresql
+
+  # course-api:
+  #   image: course-api
+  #   command: ["/wait-for-it.sh", "course-postgresql:5433", "-t", "30", "--", "java", "-jar", "course-api.jar"]
+  #   environment:
+  #     DB_HOST: course-postgresql
+  #   ports:
+  #     - '8088:8088'
+  #   networks:
+  #     - ead-network
+  #   depends_on:
+  #     - course-postgresql
+    
+  # notification-api:
+  #   image: notification-api
+  #   command: ["/wait-for-it.sh", "notification-postgresql:5434", "-t", "50", "--", "java", "-jar", "notification-api.jar"]
+  #   environment:
+  #     DB_HOST: notification-postgresql
+  #   ports:
+  #     - '8089:8089'
+  #   networks:
+  #     - ead-network
+  #   depends_on:
+  #     - notification-postgresql
