@@ -1,3 +1,5 @@
 .DS_Store
 .vscode/
-authuser/db
+authuser/db/*
+course/db/*
+notification/db/*
