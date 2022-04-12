@@ -4,10 +4,10 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 import com.ead.authuser.dtos.UserDto;
+import com.ead.authuser.enums.UserStatus;
+import com.ead.authuser.enums.UserType;
 import com.ead.authuser.models.UserModel;
 import com.ead.authuser.services.UserService;
-import com.ead.enums.UserStatus;
-import com.ead.enums.UserType;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import org.springframework.beans.BeanUtils;

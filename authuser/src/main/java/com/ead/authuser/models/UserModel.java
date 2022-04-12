@@ -13,8 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.ead.enums.UserStatus;
-import com.ead.enums.UserType;
+import com.ead.authuser.enums.UserStatus;
+import com.ead.authuser.enums.UserType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
