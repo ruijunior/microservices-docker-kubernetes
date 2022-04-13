@@ -1,5 +1,12 @@
 package com.ead.course.services;
 
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import com.ead.course.models.LessonModel;
+import com.ead.course.models.ModuleModel;
+import com.ead.course.repositories.LessonRepository;
 import com.ead.course.repositories.ModuleRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,5 +17,18 @@ public class ModuleServiceImpl implements ModuleService{
 
     @Autowired
     private ModuleRepository moduleRepository;
+
+    @Autowired
+    private LessonRepository lessonRepository;
+
+    @Transactional
+    @Override
+    public void delete(ModuleModel module) {
+        List<LessonModel> lessons = lessonRepository.findAllLessonsIntoModule(module.getModuleId());
+        if(!lessons.isEmpty()){
+            lessonRepository.deleteAll(lessons);
+        }
+        moduleRepository.delete(module);
+    }
     
 }
