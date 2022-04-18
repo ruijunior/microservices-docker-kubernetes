@@ -50,6 +50,21 @@ services:
     networks:
       - ead-network
   
+  rabbit:
+    image: "rabbitmq:3-management"
+    container_name: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: "rabbitmq"
+      RABBITMQ_DEFAULT_PASS: "rabbitmq"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    volumes:
+      - ./rabbit:/var/lib/rabbitmq
+    networks:
+      - ead-network
+  
   # authuser-api:
   #   image: authuser-api
   #   command: ["wait-for-it.sh", "authuser-postgresql:5432", "-t", "30", "--", "java", "-jar", "authuser-api.jar"]

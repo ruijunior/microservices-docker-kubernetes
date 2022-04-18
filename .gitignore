@@ -1,5 +1,11 @@
 .DS_Store
 .vscode/
-authuser/db/*
-course/db/*
-notification/db/*
+authuser/db/
+course/db/
+notification/db/
+bkp/
+docs/
+rabbit/
+authuser/logs/
+course/logs/
+notification/logs/
